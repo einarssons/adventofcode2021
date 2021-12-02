@@ -29,3 +29,22 @@ func ReadNumbersFromFile(path string) []int {
 	}
 	return numbers
 }
+
+func ReadLinesFromFile(path string) []string {
+	f, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() {
+		if err = f.Close(); err != nil {
+			log.Fatal(err)
+		}
+	}()
+	var lines []string
+	s := bufio.NewScanner(f)
+	for s.Scan() {
+		line := s.Text()
+		lines = append(lines, line)
+	}
+	return lines
+}
