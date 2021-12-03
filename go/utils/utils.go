@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func ReadNumbersFromFile(path string) []int {
@@ -44,7 +45,11 @@ func ReadLinesFromFile(path string) []string {
 	s := bufio.NewScanner(f)
 	for s.Scan() {
 		line := s.Text()
-		lines = append(lines, line)
+		trimmed := strings.Trim(line, " ")
+		if trimmed == "" {
+			continue
+		}
+		lines = append(lines, trimmed)
 	}
 	return lines
 }
