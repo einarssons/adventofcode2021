@@ -2,9 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"strconv"
-	"strings"
 
 	"github.com/einarssons/adventofcode2021/go/utils"
 )
@@ -20,18 +17,18 @@ func task2(lines []string) {
 	depth := 0
 	aim := 0
 	for _, l := range lines {
-		cmd := getCommand(l)
-		switch cmd.cmd {
+		cmd := utils.ParseCommand(l)
+		switch cmd.Verb {
 		case "forward":
-			pos += cmd.steps
-			depth += aim * cmd.steps
+			pos += cmd.Value
+			depth += aim * cmd.Value
 		case "up":
-			aim -= cmd.steps
+			aim -= cmd.Value
 			if aim < 0 {
 				aim = 0
 			}
 		case "down":
-			aim += cmd.steps
+			aim += cmd.Value
 		}
 	}
 	fmt.Printf("Task2: %d\n", depth*pos)
@@ -41,34 +38,18 @@ func task1(lines []string) {
 	pos := 0
 	depth := 0
 	for _, l := range lines {
-		cmd := getCommand(l)
-		switch cmd.cmd {
+		cmd := utils.ParseCommand(l)
+		switch cmd.Verb {
 		case "forward":
-			pos += cmd.steps
+			pos += cmd.Value
 		case "up":
-			depth -= cmd.steps
+			depth -= cmd.Value
 			if depth < 0 {
 				depth = 0
 			}
 		case "down":
-			depth += cmd.steps
+			depth += cmd.Value
 		}
 	}
 	fmt.Printf("Task1: %d\n", depth*pos)
-}
-
-type command struct {
-	cmd   string
-	steps int
-}
-
-func getCommand(line string) command {
-	parts := strings.Split(line, " ")
-	cmd := command{parts[0], 0}
-	nr, err := strconv.Atoi(parts[1])
-	if err != nil {
-		log.Fatal(err)
-	}
-	cmd.steps = nr
-	return cmd
 }

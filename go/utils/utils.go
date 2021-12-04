@@ -7,6 +7,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/oriser/regroup"
 )
 
 func ReadNumbersFromFile(path string) []int {
@@ -82,4 +84,19 @@ func ContainsString(x string, entries []string) bool {
 		}
 	}
 	return false
+}
+
+var rex = regroup.MustCompile(`(?P<verb>[a-zA-Z]+)\s+(?P<value>\d+)`)
+
+type Command struct {
+	Verb  string `regroup:"verb"`
+	Value int    `regroup:"value"`
+}
+
+func ParseCommand(line string) Command {
+	c := Command{}
+	if err := rex.MatchToTarget(line, &c); err != nil {
+		log.Fatal(err)
+	}
+	return c
 }
