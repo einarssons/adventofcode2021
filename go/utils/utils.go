@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -46,10 +47,39 @@ func ReadLinesFromFile(path string) []string {
 	for s.Scan() {
 		line := s.Text()
 		trimmed := strings.Trim(line, " ")
-		if trimmed == "" {
-			continue
-		}
 		lines = append(lines, trimmed)
 	}
 	return lines
+}
+
+func SplitToInts(line string) []int {
+	re := regexp.MustCompile("[0-9]+")
+	parts := re.FindAllString(line, -1)
+	var numbers []int
+	for _, p := range parts {
+		number, err := strconv.Atoi(p)
+		if err != nil {
+			log.Fatal(err)
+		}
+		numbers = append(numbers, number)
+	}
+	return numbers
+}
+
+func ContainsInt(x int, entries []int) bool {
+	for _, n := range entries {
+		if x == n {
+			return true
+		}
+	}
+	return false
+}
+
+func ContainsString(x string, entries []string) bool {
+	for _, n := range entries {
+		if x == n {
+			return true
+		}
+	}
+	return false
 }
