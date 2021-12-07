@@ -38,3 +38,19 @@ func TestParseCommand(t *testing.T) {
 		require.Equal(t, tc.expectedCommand, gotCommand, tc.name)
 	}
 }
+
+func TestSplitToChars(t *testing.T) {
+	testCases := []struct {
+		name     string
+		line     string
+		expected []string
+	}{
+		{"two", "ab", []string{"a", "b"}},
+		{"zero", "", []string{}},
+	}
+
+	for _, tc := range testCases {
+		got := SplitToChars(tc.line)
+		require.Equal(t, tc.expected, got, tc.name)
+	}
+}

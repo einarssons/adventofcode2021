@@ -68,6 +68,14 @@ func SplitToInts(line string) []int {
 	return numbers
 }
 
+func SplitToChars(line string) []string {
+	chars := make([]string, len(line))
+	for i := 0; i < len(line); i++ {
+		chars[i] = line[i : i+1]
+	}
+	return chars
+}
+
 func ContainsInt(x int, entries []int) bool {
 	for _, n := range entries {
 		if x == n {
@@ -106,4 +114,48 @@ func MinMax(a, b int) (int, int) {
 		return a, b
 	}
 	return b, a
+}
+
+func MinMaxInts(numbers []int) (int, int) {
+	min, max := numbers[0], numbers[0]
+	for _, nr := range numbers {
+		if nr > max {
+			max = nr
+		}
+		if nr < min {
+			min = nr
+		}
+	}
+	return min, max
+}
+
+func Min(numbers []int) int {
+	minNr := 1 << 40
+	for _, nr := range numbers {
+		if nr < minNr {
+			minNr = nr
+		}
+	}
+	return minNr
+}
+
+func Max(numbers []int) int {
+	maxNr := -(1 << 40)
+	for _, nr := range numbers {
+		if nr > maxNr {
+			maxNr = nr
+		}
+	}
+	return maxNr
+}
+
+func Abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
+}
+
+func Triangle(nr int) int {
+	return nr * (nr + 1) / 2
 }
