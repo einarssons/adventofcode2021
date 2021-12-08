@@ -159,3 +159,11 @@ func Abs(a int) int {
 func Triangle(nr int) int {
 	return nr * (nr + 1) / 2
 }
+
+// GCDuint64 - greatest common divisor (GCD) via Euclidean algorithm
+func GCD(a, b int) int {
+	for b != 0 {
+		b, a = a%b, b
+	}
+	return a
+}
