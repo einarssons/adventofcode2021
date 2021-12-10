@@ -167,3 +167,11 @@ func GCD(a, b int) int {
 	}
 	return a
 }
+
+func ReverseStrings(s []string) {
+	l := len(s)
+	nrSwaps := l / 2
+	for i := 0; i < nrSwaps; i++ {
+		s[i], s[l-1-i] = s[l-1-i], s[i]
+	}
+}

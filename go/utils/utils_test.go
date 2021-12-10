@@ -72,3 +72,20 @@ func TestGCD(t *testing.T) {
 		require.Equal(t, tc.expected, got, fmt.Sprintf("GCD(%d,%d)\n", tc.a, tc.b))
 	}
 }
+
+func TestReverseStrings(t *testing.T) {
+
+	testCases := []struct {
+		in       []string
+		expected []string
+	}{
+		{[]string{"a", "b", "c"}, []string{"c", "b", "a"}},
+		{[]string{"a", "b", "c", "d"}, []string{"d", "c", "b", "a"}},
+	}
+
+	for _, tc := range testCases {
+		ReverseStrings(tc.in)
+		require.Equal(t, tc.expected, tc.in)
+	}
+
+}
