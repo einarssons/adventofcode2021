@@ -1,18 +1,28 @@
 package utils
 
+// Set - mathematical set with operations
+// Empty struct requires zero bytes so is more efficient than bool
 type Set map[string]struct{}
 
+// CreateSet - create an empty set
 func CreateSet() Set {
 	return Set(make(map[string]struct{}))
 }
 
+// Contains - check if elem in set
 func (s Set) Contains(elem string) bool {
 	_, ok := s[elem]
 	return ok
 }
 
+// Add - add elem to set
 func (s Set) Add(elem string) {
 	s[elem] = struct{}{}
+}
+
+// Remove - remove elem from set (does not need to be in set)
+func (s Set) Remove(elem string) {
+	delete(s, elem)
 }
 
 // Extend - extend set s with all elements in other (the result is union)
