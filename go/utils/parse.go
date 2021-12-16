@@ -39,6 +39,22 @@ func ContainsInt(x int, entries []int) bool {
 	return false
 }
 
+func CountInts(entries []int) map[int]int {
+	m := make(map[int]int)
+	for _, n := range entries {
+		m[n]++
+	}
+	return m
+}
+
+func CountStrings(entries []string) map[string]int {
+	m := make(map[string]int)
+	for _, n := range entries {
+		m[n]++
+	}
+	return m
+}
+
 func ContainsString(x string, entries []string) bool {
 	for _, n := range entries {
 		if x == n {

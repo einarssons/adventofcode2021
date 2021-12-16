@@ -32,7 +32,45 @@ func CreateDigitGridFromLines(lines []string) DigitGrid {
 	return g
 }
 
-// InBounds - is (i, j) in grid
-func (g DigitGrid) InBounds(i, j int) bool {
-	return 0 <= i && i < g.Height && 0 <= j && j < g.Width
+func CreateZeroDigitGrid(width, height int) DigitGrid {
+	grid := DigitGrid{
+		Grid:   make([][]int, 0, height),
+		Width:  width,
+		Height: height}
+
+	for i := 0; i < grid.Height; i++ {
+		grid.Grid = append(grid.Grid, make([]int, grid.Width))
+	}
+	return grid
+}
+
+// InBounds - is (y, x) in grid
+func (g DigitGrid) InBounds(y, x int) bool {
+	return 0 <= y && y < g.Height && 0 <= x && x < g.Width
+}
+
+func (g DigitGrid) SetValue(value int) {
+	for y := 0; y < g.Height; y++ {
+		for x := 0; x < g.Width; x++ {
+			g.Grid[x][y] = value
+		}
+	}
+}
+
+type BoolGrid struct {
+	Grid   [][]bool
+	Width  int
+	Height int
+}
+
+func CreateBoolGrid(width, height int) BoolGrid {
+	grid := BoolGrid{
+		Grid:   make([][]bool, 0, height),
+		Width:  width,
+		Height: height}
+
+	for i := 0; i < grid.Height; i++ {
+		grid.Grid = append(grid.Grid, make([]bool, grid.Width))
+	}
+	return grid
 }
