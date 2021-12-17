@@ -8,8 +8,9 @@ import (
 	"github.com/oriser/regroup"
 )
 
+// SplitToInts - find all ints (including sign)
 func SplitToInts(line string) []int {
-	re := regexp.MustCompile("[0-9]+")
+	re := regexp.MustCompile("-?[0-9]+")
 	parts := re.FindAllString(line, -1)
 	var numbers []int
 	for _, p := range parts {

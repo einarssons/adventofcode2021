@@ -16,6 +16,7 @@ func TestSplitToInts(t *testing.T) {
 		{"commma-list", "1,2,3", []int{1, 2, 3}},
 		{"empty-list", "", nil},
 		{"space-list", "1 2   4", []int{1, 2, 4}},
+		{"dec17", "target area: x=257..286, y=-101..-57", []int{257, 286, -101, -57}},
 	}
 
 	for _, tc := range testCases {
